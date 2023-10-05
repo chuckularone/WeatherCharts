@@ -1,0 +1,5 @@
+# m h  dom mon dow   command
+@reboot /scriptdir/runweathergrab.sh  2>&1 1>/tmp/runweathergrab.out
+03 00 * * * /scriptdir/killweathergrab.sh  2>&1 1>/tmp/killweathergrab.out
+05 00 * * * /scriptdir/runweathergrab.sh  2>&1 1>/tmp/runweathergrab.out
+10,20,30,40,50,00 * * * * /usr/bin/python3 /scriptdir/weather.py 1>/tmp/weathercharts.out 2>&1
