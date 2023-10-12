@@ -2,6 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import time
 
+nowinfo = open("/scriptdir/data/currStats.out")
+rawdata = nowinfo.read()
+datalist = rawdata.splitlines()
+
 current_time = time.ctime()
 
 pressure_file = "/scriptdir/data/outpress.raw"
@@ -12,23 +16,33 @@ df1=pd.read_csv(pressure_file)
 df2=pd.read_csv(temperature_file)
 df3=pd.read_csv(humidity_file)
 
+humidTitle = current_time + ' - ' + datalist[1] + ' inHg'
+print(humidTitle)
+
 fig, ax = plt.subplots(figsize=(10,8))
 df1.plot.line(x='time', y='value',color='crimson', ax=ax)
-plt.title(current_time)
+plt.title(humidTitle)
 plt.ylabel("Pressure in inHg")
 plt.xlabel("Time of reading")
 plt.savefig('/var/www/html/image/pressure.png')
 
+tempTitle = current_time + ' - ' + datalist[0] + ' F'
+print(tempTitle)
+
 fig, ax = plt.subplots(figsize=(10,8))
 df2.plot.line(x='time', y='value',color='crimson', ax=ax)
-plt.title(current_time)
+plt.title(tempTitle)
 plt.ylabel("Temperature in F")
 plt.xlabel("Time of reading")
 plt.savefig('/var/www/html/image/temperature.png')
 
+pressTitle = current_time + ' - ' + datalist[2] + '%'
+print(pressTitle)
+
 fig, ax = plt.subplots(figsize=(10,8))
 df3.plot.line(x='time', y='value',color='crimson', ax=ax)
-plt.title(current_time)
+plt.title(pressTitle)
 plt.ylabel("Humidity in %")
 plt.xlabel("Time of reading")
 plt.savefig('/var/www/html/image/humidity.png')
+

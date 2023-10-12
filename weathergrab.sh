@@ -11,6 +11,11 @@ echo $(date +"%Y-%m-%d"), $(date +"%H:%M:%S"), $holdpress, inHg >> /scriptdir/da
 echo $(date +"%Y-%m-%d"), $(date +"%H:%M:%S"), $holdtemp, F >> /scriptdir/data/outtemp.raw
 echo $(date +"%Y-%m-%d"), $(date +"%H:%M:%S"), $holdhumid, % >> /scriptdir/data/outhumid.raw
 
+
+echo $holdtemp > /scriptdir/data/currStats.out
+echo $holdpress  >> /scriptdir/data/currStats.out
+echo $holdhumid  >> /scriptdir/data/currStats.out
+
 sleep 600
 done
 
