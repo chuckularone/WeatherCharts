@@ -18,4 +18,3 @@ echo $holdhumid  >> /scriptdir/data/currStats.out
 
 sleep 600
 done
-

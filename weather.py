@@ -45,4 +45,3 @@ plt.title(pressTitle)
 plt.ylabel("Humidity in %")
 plt.xlabel("Time of reading")
 plt.savefig('/var/www/html/image/humidity.png')
-
