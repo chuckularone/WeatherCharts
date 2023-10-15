@@ -1,9 +1,9 @@
 @reboot /scriptdir/runweathergrab.sh  2>&1 1>/tmp/runweathergrab.out
 03 00 * * * /scriptdir/killweathergrab.sh  2>&1 1>/tmp/killweathergrab.out
 04 00 * * * /usr/bin/rm -f /scriptdir/nohup.out
-04 00 * * * /usr/bin/mv /var/html/www/image/humidity.png /var/html/www/image/archive/humidity.$(date +"%H:%M:%S").png
-04 00 * * * /usr/bin/mv /var/html/www/image/pressure.png /var/html/www/image/archive/pressure.$(date +"%H:%M:%S").png
-04 00 * * * /usr/bin/mv /var/html/www/image/temperature.png /var/html/www/image/archive/temperature.$(date +"%H:%M:%S").png
+04 00 * * * /usr/bin/mv /var/html/www/image/humidity.png /var/html/www/image/archive/humidity.$(date +"%H:%M:%S").png 2>&1 1>/tmp/move1
+04 00 * * * /usr/bin/mv /var/html/www/image/pressure.png /var/html/www/image/archive/pressure.$(date +"%H:%M:%S").png  2>&1 1>/tmp/move2
+04 00 * * * /usr/bin/mv /var/html/www/image/temperature.png /var/html/www/image/archive/temperature.$(date +"%H:%M:%S").png 2>&1 1>/tmp/move3
 05 00 * * * /scriptdir/runweathergrab.sh  2>&1 1>/tmp/runweathergrab.out
 10,20,30,40,50,00 * * * * /usr/bin/python3 /scriptdir/weather.py 1>/tmp/weathercharts.out 2>&1
 
