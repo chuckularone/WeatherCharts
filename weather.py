@@ -6,6 +6,8 @@ nowinfo = open("/scriptdir/data/currStats.out")
 rawdata = nowinfo.read()
 datalist = rawdata.splitlines()
 
+outDir = "/var/www/html/image/"
+
 current_time = time.ctime()
 
 pressure_file = "/scriptdir/data/outpress.raw"
@@ -13,48 +15,34 @@ temperature_file = "/scriptdir/data/outtemp.raw"
 humidity_file = "/scriptdir/data/outhumid.raw"
 windspeed_file = "/scriptdir/data/outspeed.raw"
 
-df1=pd.read_csv(pressure_file)
-df2=pd.read_csv(temperature_file)
-df3=pd.read_csv(humidity_file)
-df4=pd.read_csv(windspeed_file)
+df0=pd.read_csv(pressure_file)
+df1=pd.read_csv(temperature_file)
+df2=pd.read_csv(humidity_file)
+df3=pd.read_csv(windspeed_file)
 
-humidTitle = current_time + ' - ' + datalist[1] + ' inHg'
-print(humidTitle)
+class ImageOut:
+    def __init__(self, chartTitle, rawVal, unit, valList, outFile):
+        self.chartTitle = chartTitle
+        self.rawVal = rawVal
+        self.unit = unit
+        self.valList = valList
+        self.outFile = outFile
 
-fig, ax = plt.subplots(figsize=(10,8))
-df1.plot.line(x='time', y='value',color='crimson', ax=ax)
-plt.title(humidTitle)
-plt.ylabel("Pressure in inHg")
-plt.xlabel("Time of reading")
-plt.savefig('/var/www/html/image/pressure.png')
+    def createImage(self):
+        now_time = time.ctime()
+        printTitle = now_time + ' - ' + self.rawVal + self.unit
+        fig, ax = plt.subplots(figsize=(10,8))
+        self.valList.plot.line(x='time', y='value',color='crimson', ax=ax)
+        plt.title(printTitle)
+        plt.ylabel(self.chartTitle)
+        plt.xlabel("Time of reading")
+        plt.savefig(outDir + self.outFile)
 
-tempTitle = current_time + ' - ' + datalist[0] + ' F'
-print(tempTitle)
-
-fig, ax = plt.subplots(figsize=(10,8))
-df2.plot.line(x='time', y='value',color='crimson', ax=ax)
-plt.title(tempTitle)
-plt.ylabel("Temperature in F")
-plt.xlabel("Time of reading")
-plt.savefig('/var/www/html/image/temperature.png')
-
-pressTitle = current_time + ' - ' + datalist[2] + '%'
-print(pressTitle)
-
-fig, ax = plt.subplots(figsize=(10,8))
-df3.plot.line(x='time', y='value',color='crimson', ax=ax)
-plt.title(pressTitle)
-plt.ylabel("Humidity in %")
-plt.xlabel("Time of reading")
-plt.savefig('/var/www/html/image/humidity.png')
-
-
-speedTitle = current_time + ' - ' + datalist[3] + ' MPH'
-print(speedTitle)
-
-fig, ax = plt.subplots(figsize=(10,8))
-df4.plot.line(x='time', y='value',color='crimson', ax=ax)
-plt.title(speedTitle)
-plt.ylabel("Wind Speed in MPH")
-plt.xlabel("Time of reading")
-plt.savefig('/var/www/html/image/speed.png')
+myImage0 = ImageOut('Pressure in inHg',  datalist[0], ' inHg', df0, 'pressure.png')
+myImage1 = ImageOut('Temperature in F',  datalist[1], ' F',    df1, 'temperature.png')
+myImage2 = ImageOut('Humidity in %',     datalist[2], '%',     df2, 'humidity.png')
+myImage3 = ImageOut('Wind Speed in MPH', datalist[3], ' MPH',  df3, 'speed.png')
+myImage0.createImage()
+myImage1.createImage()
+myImage2.createImage()
+myImage3.createImage()
