@@ -1,4 +1,4 @@
-killpid=$(cat /scriptdir/data/weathergrab.pid)
+killpid=$(cat /scriptdir/weathercharts/data/weathergrab.pid)
 dtg=$(date +"%Y%m%d.%H%M%S")
 headerLine="date,time,value,unit"
 
@@ -6,16 +6,17 @@ headerLine="date,time,value,unit"
 kill -9  $killpid
 
 # Move off old outfiles
-mv  /scriptdir/data/outtemp.raw /scriptdir/data/outtemp.$dtg.raw
-mv  /scriptdir/data/outpress.raw /scriptdir/data/outpress.$dtg.raw
-mv  /scriptdir/data/outhumid.raw /scriptdir/data/outhumid.$dtg.raw
+mv  /scriptdir/weathercharts/data/outtemp.raw /scriptdir/weathercharts/data/outtemp.$dtg.raw
+mv  /scriptdir/weathercharts/data/outpress.raw /scriptdir/weathercharts/data/outpress.$dtg.raw
+mv  /scriptdir/weathercharts/data/weathercharts/outhumid.raw /scriptdir/weathercharts/data/outhumid.$dtg.raw
 
 # Create new outfiles
-echo $headerLine > /scriptdir/data/outtemp.raw
-echo $headerLine > /scriptdir/data/outhumid.raw
-echo $headerLine > /scriptdir/data/outpress.raw
+echo $headerLine > /scriptdir/weathercharts/data/outtemp.raw
+echo $headerLine > /scriptdir/weathercharts/data/outhumid.raw
+echo $headerLine > /scriptdir/weathercharts/data/outpress.raw
 
 # Run new script and capture PID
-nohup /scriptdir/weathergrab.sh &
-echo $! > /scriptdir/data/weathergrab.pid
+nohup /scriptdir/weathercharts/weathergrab.sh &
+echo $! > /scriptdir/weathercharts/data/weathergrab.pid
+
 

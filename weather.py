@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import time
 
-nowinfo = open("/scriptdir/data/currStats.out")
+nowinfo = open("/scriptdir/weathercharts/data/currStats.out")
 rawdata = nowinfo.read()
 datalist = rawdata.splitlines()
 
@@ -10,10 +10,11 @@ outDir = "/var/www/html/image/"
 
 current_time = time.ctime()
 
-pressure_file = "/scriptdir/data/outpress.raw"
-temperature_file = "/scriptdir/data/outtemp.raw"
-humidity_file = "/scriptdir/data/outhumid.raw"
-windspeed_file = "/scriptdir/data/outspeed.raw"
+pressure_file = "/scriptdir/weathercharts/data/outpress.raw"
+temperature_file = "/scriptdir/weathercharts/data/outtemp.raw"
+humidity_file = "/scriptdir/weathercharts/data/outhumid.raw"
+windspeed_file = "/scriptdir/weathercharts/data/outspeed.raw"
+
 
 df0=pd.read_csv(pressure_file)
 df1=pd.read_csv(temperature_file)
