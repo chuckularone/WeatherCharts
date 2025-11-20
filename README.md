@@ -18,10 +18,11 @@ It publishes charts for the temperature, pressure and humidity daily starting at
 - And Wordpress
 
 ### To do: 
-- [ ] Archive daily charts for future retrieval
+- [X] Archive daily charts for future retrieval
 - [ ] Develop a way to select and scan past charts
 - [ ] Develop a way to combine data from a date range into a single chart.
 
 
-20251114 CJM - Recovered scripts after accidental delete.
+20251114 CJM - Recovered scripts after accidental delete. 
                Moved files from /scriptdir to /scriptdir/weatherstuff
+20260502 CJM - Finally chacking in changes to push daily data to a SQLite database
