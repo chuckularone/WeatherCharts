@@ -8,7 +8,7 @@ kill -9  $killpid
 # Move off old outfiles
 mv  /scriptdir/weathercharts/data/outtemp.raw /scriptdir/weathercharts/data/outtemp.$dtg.raw
 mv  /scriptdir/weathercharts/data/outpress.raw /scriptdir/weathercharts/data/outpress.$dtg.raw
-mv  /scriptdir/weathercharts/data/weathercharts/outhumid.raw /scriptdir/weathercharts/data/outhumid.$dtg.raw
+mv  /scriptdir/weathercharts/data/outhumid.raw /scriptdir/weathercharts/data/outhumid.$dtg.raw
 
 # Create new outfiles
 echo $headerLine > /scriptdir/weathercharts/data/outtemp.raw
