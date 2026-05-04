@@ -18,7 +18,6 @@ It publishes charts for the temperature, pressure and humidity daily starting at
 - And Wordpress
 
 ### To do: 
-- [X] Archive daily charts for future retrieval
 - [ ] Develop a way to select and scan past charts
 - [ ] Develop a way to combine data from a date range into a single chart.
 
