@@ -28,4 +28,7 @@ It publishes charts for the temperature, pressure and humidity daily starting at
 - Moved files from /scriptdir to /scriptdir/weatherstuff
 			   
 #### 20260502 CJM 
-- Finally chacking in changes to push daily data to a SQLite database
+- Finally checking in changes to push daily data to a SQLite database
+
+#### 20260507 CJM
+- Cleaned up the look of the HTML output
