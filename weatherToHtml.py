@@ -19,7 +19,7 @@ original = obs["obsTimeLocal"]
 dt = datetime.strptime(original, "%Y-%m-%d %H:%M:%S")
 formatted = dt.strftime("%H:%M on %m/%d/%Y")
 
-# Conditional Formatting
+# Conditional Formatting — returns inline style string for a <td>
 def style_temp(value):
     if value > 82:
         return 'style="background-color:#FF0000; color:#FFFFFF;"'
@@ -43,46 +43,81 @@ def style_humidity(value):
         return 'style="background-color:#FFFFFF; color:#000000;"'
 
 # HTML content
-html = f"""
-<!DOCTYPE html>
-<html>
+html = f"""<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="60">
-    <title>KPAASTON20</title>
-    <style>
-        body {{ font-family: Arial, sans-serif; margin: 20px; }}
-        table {{ border-collapse: collapse; width: 100%; }}
-        th, td {{ border: 1px solid #ccc; padding: 8px; text-align: left; }}
-        th {{ background-color: #f2f2f2; }}
-    </style>
-    <script>
-      window.resizeTo(500, 550);
-    </script>
-
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="60">
+  <title>KPAASTON20</title>
+  <style>
+    body {{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f7f7f9;
+      color: #111;
+    }}
+    .card {{
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 24px rgba(0,0,0,.08);
+      padding: 24px;
+    }}
+    h1 {{
+      text-align: center;
+      margin: 8px 0 18px;
+      font-size: 1.4rem;
+      letter-spacing: .5px;
+    }}
+    table {{
+      width: 100%;
+      border-collapse: collapse;
+    }}
+    th, td {{
+      border: 1px solid #e5e7eb;
+      padding: 10px 14px;
+      text-align: left;
+    }}
+    th {{
+      background: #fafafa;
+      font-weight: 600;
+      width: 45%;
+    }}
+    .muted {{
+      color: #6b7280;
+      font-size: .85rem;
+      text-align: center;
+      margin-top: 12px;
+    }}
+  </style>
+  <script>
+    window.resizeTo(540, 620);
+  </script>
 </head>
 <body>
-    <h2>Weather Observation for KPAASTON20</h2>
-<table>
-        <tr><th>Station ID</th><td>The Shanty - {obs["stationID"]}</td></tr>
-        <tr><th>Local Time</th><td>{formatted}</td></tr>
-        <tr><th>Humidity</th><td {style_humidity(obs["humidity"])}>{obs["humidity"]}%</td></tr>
-        <tr><th>Temperature</th><td {style_temp(imp["temp"])}>{imp["temp"]} °F</td></tr>
-        <tr><th>Heat Index</th><td {style_temp(imp["heatIndex"])}>{imp["heatIndex"]} °F</td></tr>
-        <tr><th>Wind Speed</th><td {style_wind(imp["windSpeed"], imp["windGust"])}>{imp["windSpeed"]} mph</td></tr>
-        <tr><th>Wind Gust</th><td {style_wind(imp["windSpeed"], imp["windGust"])}>{imp["windGust"]} mph</td></tr>
-        <tr><th>Wind Direction</th><td>{obs["winddir"]}°</td></tr>
-        <tr><th>Pressure</th><td>{imp["pressure"]} inHg</td></tr>
-        <tr><th>Precipitation Rate</th><td>{imp["precipRate"]} in/hr</td></tr>
-        <tr><th>Precipitation Total</th><td>{imp["precipTotal"]} in</td></tr>
+  <div class="card">
+    <h1>Weather Observation for KPAASTON20</h1>
+    <table>
+      <tr><th>Station ID</th><td>The Shanty &ndash; {obs["stationID"]}</td></tr>
+      <tr><th>Local Time</th><td>{formatted}</td></tr>
+      <tr><th>Humidity</th><td {style_humidity(obs["humidity"])}>{obs["humidity"]}%</td></tr>
+      <tr><th>Temperature</th><td {style_temp(imp["temp"])}>{imp["temp"]} &deg;F</td></tr>
+      <tr><th>Heat Index</th><td {style_temp(imp["heatIndex"])}>{imp["heatIndex"]} &deg;F</td></tr>
+      <tr><th>Wind Speed</th><td {style_wind(imp["windSpeed"], imp["windGust"])}>{imp["windSpeed"]} mph</td></tr>
+      <tr><th>Wind Gust</th><td {style_wind(imp["windSpeed"], imp["windGust"])}>{imp["windGust"]} mph</td></tr>
+      <tr><th>Wind Direction</th><td>{obs["winddir"]}&deg;</td></tr>
+      <tr><th>Pressure</th><td>{imp["pressure"]} inHg</td></tr>
+      <tr><th>Precipitation Rate</th><td>{imp["precipRate"]} in/hr</td></tr>
+      <tr><th>Precipitation Total</th><td>{imp["precipTotal"]} in</td></tr>
     </table>
+    <div class="muted">Auto-refreshes every 60 seconds.</div>
+  </div>
 </body>
-</html>
-"""
+</html>"""
 
 # Write to an HTML file
 output_file = "/var/www/html/weatherdata/weather_observation.html"
 with open(output_file, "w") as f:
     f.write(html)
-
-
