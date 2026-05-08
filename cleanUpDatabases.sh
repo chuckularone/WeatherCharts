@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DB="/scriptdir/weathercharts/data/weather.sqlite"
-TABLES="gusts humidity pressure temperature windspeed"
+TABLES="gusts"
 YESTERDAY=$(date -d 'yesterday' '+%Y-%m-%d')
 
 for table in $TABLES; do
@@ -26,6 +26,7 @@ FROM (
     WHERE date = '${YESTERDAY}'
 )
 WHERE prev_value IS NULL OR value != prev_value;
+DELETE FROM ${table};
 EOF
 
     if [ $? -eq 0 ]; then
