@@ -5,7 +5,6 @@ The purpose of this suite of scripts is to publish hyperlocal weather elements f
 
 It publishes charts for the temperature, pressure and humidity daily starting at midnight
 
-> [!Success]
 > What does it do? (This may feel out of order, but it is the order things run in cron)
 > #### killweathergrab.sh
 >  - At midnight (if there is a running instance) this script kills the existing instance
