@@ -27,25 +27,22 @@ It publishes charts for the temperature, pressure and humidity daily starting at
 >  -  Using pandas and matplotlib creates graphs from the raw data files and places them in the image directory of the web server
 >  - This script runs every 10 minutes everyday
 > #### cleanUpDatabases.sh
->  - This script first goes through the databases loaded by importWeather.pl and puts all of the values into a single table; "date, time, temperature, humidity, pressure, windspeed, gusts"
->  - Next it pulls out unique values solving the "gaps and islands" problem and greatly reducing the size of the list, as all of these values change relatively slowly
+>  - This script first goes through the tables loaded by importWeather.pl and puts all of the values into a single table named "weather"; "date, time, temperature, humidity, pressure, windspeed, gusts"
+>  - Next it pulls out unique values solving the "gaps and islands" problem and greatly reducing the size of the list, as all of these values change relatively slowly and saves the output to new tables (e.g. temperature_clean)
 > #### weatherToHtml.py
 >  - Creates a single panel [display](http://blog.theshanty.us/weatherdata/weather_observation.html) of all of the current data collected by the KPAASTON20 weather station
 
 ### It uses:
 - Unix Shell Scripting
-- Curl
 - The Weather Underground API
 - JSON parsing to list
 - Python
   - pandas
   - matplotlib
-- And Wordpress
+- HTML
 
 ### To do:
-- [ ] Develop a way to select and scan past charts
-- [ ] Develop a way to combine data from a date range into a single chart.
-
+- [ ] Create a database query to extract a date range and feed it to weather.py to create custom weather charts
 ---
 ## Changes:
 #### 20251114 CJM
