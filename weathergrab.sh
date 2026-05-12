@@ -22,6 +22,8 @@ echo $holdhumid  >> /scriptdir/weathercharts/data/currStats.out
 echo $holdwindspeed  >> /scriptdir/weathercharts/data/currStats.out
 echo $holdwindgust  >> /scriptdir/weathercharts/data/currStats.out
 
+# Copy currStats.out to www dir
+cp /scriptdir/weathercharts/data/currStats.out /var/www/html/weatherdata/currStats.out
 sleep 600
 done
 
